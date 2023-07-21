@@ -94,6 +94,11 @@ typedef struct lenArray {
 
 void lenArray_init(lenArray_t* arr, size_t size)
 {
+    if(arr == NULL) {
+        printf("Invalid address for arr passed in!\n");
+        return;
+    }
+
     arr->arr = (int32_t*)malloc(size * sizeof(int32_t));
     if(arr->arr == NULL) {
         arr->len = arr->capacity = 0;
@@ -109,6 +114,11 @@ void lenArray_init(lenArray_t* arr, size_t size)
 
 void cut_index(lenArray_t* arr, size_t index)
 {
+    if(arr == NULL) {
+        printf("Invalid address for arr passed in!\n");
+        return;
+    }
+
     assert(index < arr->capacity);
     
     memmove(&(arr->arr[index]), &(arr->arr[index + 1]), (arr->len - index - 1) * sizeof(int32_t)); 
@@ -133,6 +143,9 @@ int main(int argc, char** argv)
         size = 100;
     } else {
         size = atoi(argv[1]);
+        // could put some additional checks here
+        // but we're just doing a basic test, 
+        // no need to over do it
     }
 
     printf("Size: %zu\n", size);
